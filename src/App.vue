@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-for="note of notes" :key="note.id">
+      <h2>{{note.title}}</h2>
+      <p>{{note.content}}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      notes: []
+    }
+  },
+  async mounted() {
+    this.notes = await fetch('/api/notes').then(res => res.json()).catch(err => { throw err} );
   }
 }
 </script>
