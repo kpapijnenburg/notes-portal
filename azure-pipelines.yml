@@ -25,7 +25,7 @@ steps:
     inputs:
       repository: '$(dockerHubId)/$(imageName)'
       command: 'BuildAndPush'
-      Dockerfile: './notes-portal/Dockerfile'
+      Dockerfile: './Dockerfile'
       tags: |
         $(Build.BuildId)
         latest
