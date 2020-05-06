@@ -1,29 +1,16 @@
 <template>
-  <div>
-    <div v-if="note && handwriting">
-      <h1 class="md-headline">{{this.note.title}}</h1>
-      <div class="md-layout">
-        <p
-          class="md-caption md-layout-item md-size-20"
-        >Aangemaakt op: {{this.note.createdAt | localeDate}}</p>
-        <p
-          class="md-caption md-layout-item md-size-20"
-        >Laats aangepast op: {{this.note.updatedAt | localeDate}}</p>
-        <p class="md-caption md-layout-item md-size-20">Status: {{this.handwriting.state}}</p>
-      </div>
-      <md-card class="md-elevation-2">
-        <md-card-media>
-          <img src="https://via.placeholder.com/300x200" alt />
-        </md-card-media>
-      </md-card>
-      <div v-if="handwriting">
-        <p
-          class="md-display-1 md-layout md-alignment-center"
-          v-for="sentence of sentences"
-          :key="sentence.id"
-        >{{sentence}}</p>
-      </div>
-    </div>
+  <div v-if="note && handwriting">
+    <md-card>
+      <md-card-header>
+        <div class="md-title">{{this.note.title}}</div>
+      </md-card-header>
+      <md-card-media>
+        <img img src="https://via.placeholder.com/500x300" alt />
+      </md-card-media>
+      <md-card-content>
+          <p class="md-body-2" v-for="sentence of sentences" :key="sentence.id">{{sentence}}</p>
+      </md-card-content>
+    </md-card>
     <div v-if="!note">Selecteer een notitie...</div>
   </div>
 </template>
