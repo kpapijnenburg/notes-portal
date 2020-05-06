@@ -14,13 +14,13 @@ export default class NotesService {
   }
 
   async GetById(id) {
-    const result = fetch(`${this.baseUrl}/${id}`)
-      .then((res) => res.json())
-      .catch((err) => {
-        throw err;
-      });
+    const response = await fetch(`${this.baseUrl}/${id}`);
 
-    return await result;
+    if (!response.ok) {
+      // Do something
+    }
+
+    return response.json();
   }
   //   Create(note) {}
   //   Update(note) {}
