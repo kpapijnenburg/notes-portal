@@ -9,27 +9,28 @@
         <md-toolbar class="md-transparent md-title" md-elevation="0">Mijn notities</md-toolbar>
         <md-list>
           <md-divider></md-divider>
-          <md-list-item v-for="note of notes" :key="note.id" href="/">{{note.title}}</md-list-item>
+          <md-list-item
+            v-for="note of notes"
+            :key="note.id"
+            :to="`/notes/${note.id}`"
+          >{{note.title}}</md-list-item>
           <md-divider></md-divider>
           <md-list-item>Nieuw</md-list-item>
         </md-list>
       </md-app-drawer>
       <md-app-content>
-        <note></note>
+        <router-view></router-view>
       </md-app-content>
     </md-app>
   </div>
 </template>
 
 <script>
-import Note from "./components/Note.vue";
 import NotesService from "./services/NotesService";
 
 export default {
   name: "App",
-  components: {
-    note: Note
-  },
+  components: {},
   data: () => {
     return {
       notes: [],

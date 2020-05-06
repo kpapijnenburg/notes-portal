@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="md-display-1">{{this.title}}</h1>
-    <img src="https://ocr-demo.abtosoftware.com/uploads/handwritten2.jpg" alt="">
+    <img src="https://ocr-demo.abtosoftware.com/uploads/handwritten2.jpg" alt />
     <p v-for="sentence of sentences" :key="sentence.id">{{sentence}}</p>
     <p>Status: {{this.status}}</p>
     <p>Aangemaakt op: {{this.createdAt}}</p>
@@ -32,14 +32,18 @@ export default {
   },
   methods: {
     processNote() {
-        this.title = this.note.title,
-        this.createdAt = (new Date(this.note.createdAt).toLocaleDateString('nl-NL')),
-        this.updatedAt = (new Date(this.note.updatedAt).toLocaleDateString('nl-NL')),
-        this.image = this.note.imageData
+      (this.title = this.note.title),
+        (this.createdAt = new Date(this.note.createdAt).toLocaleDateString(
+          "nl-NL"
+        )),
+        (this.updatedAt = new Date(this.note.updatedAt).toLocaleDateString(
+          "nl-NL"
+        )),
+        (this.image = this.note.imageData);
     },
     processHandwritings() {
-        this.separeteSentences()
-        this.status = this.handwritings[0].state;
+      this.separeteSentences();
+      this.status = this.handwritings[0].state;
     },
     separeteSentences() {
       this.handwritings.forEach(handwriting => {
@@ -48,10 +52,15 @@ export default {
     }
   },
   async mounted() {
-    this.note = await this.notesService.GetById(1);
-    this.processNote()
+    this.note = await this.notesService.GetById(2);
+    this.processNote();
     this.handwritings = await this.handwritingService.GetByNoteId(this.note.id);
     this.processHandwritings();
+  },
+
+  async beforeRouteUpdate() {
+    console.log("Before route update...");
+    console.log(this.$route.params.id);
   }
 };
-</script>
+</script>before

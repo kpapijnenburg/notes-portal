@@ -7,14 +7,14 @@ import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 
+const routes = [{ path: "/notes/:id", component: Note }];
+
+const router = new VueRouter({ routes });
+
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
-
-const routes = [{ path: "/notes:id", component: Note }];
-
-const router = new VueRouter({ routes });
 
 new Vue({
   router,
