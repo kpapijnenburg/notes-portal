@@ -8,17 +8,20 @@
 </template>
 
 <script>
+import NotesService from "./services/NotesService";
+
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
       notes: []
-    }
+    };
   },
   async mounted() {
-    this.notes = await fetch('/api/notes').then(res => res.json()).catch(err => { throw err} );
+    const service = new NotesService();
+    this.notes = await service.GetById(1);
   }
-}
+};
 </script>
 
 <style>
