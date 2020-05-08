@@ -22,6 +22,19 @@ export default class NotesService {
 
     return response.json();
   }
+
+  async Create(note) {
+    const response = await fetch(`${this.baseUrl}`, {
+      method: "POST",
+      body: note,
+    });
+
+    if (!response.ok) {
+      // do something
+    }
+
+    return response.json();
+  }
   //   Create(note) {}
   //   Update(note) {}
   //   Delete(note) {}

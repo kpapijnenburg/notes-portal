@@ -31,7 +31,7 @@
           <note :note="selectedNote"></note>
         </div>
         <div v-if="!selectedNote">
-          <create></create>
+          <create @created="handleCreate"></create>
         </div>
       </md-app-content>
     </md-app>
@@ -56,6 +56,10 @@ export default {
   methods: {
     handleClick() {
       this.selectedNote = undefined;
+    },
+    async handleCreate(note) {
+      const created = await this.service.Create(note);
+      console.log(created);
     }
   },
   async mounted() {
