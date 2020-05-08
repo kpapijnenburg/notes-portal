@@ -1,13 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";
-import Note from "./components/Note.vue";
+import Create from "./components/Create.vue";
 
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 
-const routes = [{ path: "/notes/:id", component: Note }];
+const routes = [{ path: "/create", component: Create }];
 
 const router = new VueRouter({ routes });
 

@@ -9,13 +9,30 @@
         <md-toolbar class="md-transparent md-title" md-elevation="0">Mijn notities</md-toolbar>
         <md-list>
           <md-divider></md-divider>
-          <md-list-item  @click="selectedNote = note" v-for="note of notes" href="#" :key="note.id">{{note.title}}</md-list-item>
+          <md-list-item
+            @click="selectedNote = note"
+            v-for="note of notes"
+            href="#"
+            :key="note.id"
+          >{{note.title}}</md-list-item>
           <md-divider></md-divider>
-          <md-list-item>Nieuw</md-list-item>
+          <md-list-item>
+            <md-button
+              @click="handleClick"
+              class="md-icon-button md-dense md-raised md-primary md-alignment-right"
+            >
+              <md-icon>+</md-icon>
+            </md-button>
+          </md-list-item>
         </md-list>
       </md-app-drawer>
       <md-app-content>
-        <note :note="selectedNote"></note>
+        <div v-if="selectedNote">
+          <note :note="selectedNote"></note>
+        </div>
+        <div v-if="!selectedNote">
+          <create></create>
+        </div>
       </md-app-content>
     </md-app>
   </div>
@@ -24,16 +41,22 @@
 <script>
 import NotesService from "./services/NotesService";
 import Note from "./components/Note.vue";
+import Create from "./components/Create.vue";
 
 export default {
   name: "App",
-  components: { Note },
+  components: { Note, Create },
   data: () => {
     return {
       notes: [],
       selectedNote: undefined,
       service: new NotesService()
     };
+  },
+  methods: {
+    handleClick() {
+      this.selectedNote = undefined;
+    }
   },
   async mounted() {
     this.notes = await this.service.Get();
