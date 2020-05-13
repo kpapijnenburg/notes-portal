@@ -61,9 +61,7 @@ export default {
     async handleAddClick() {
       const note = {
         title: this.title,
-        imageData: this.canvas.toDataURL(),
-        createdAt: Date.now(),
-        updatedAt: Date.now()
+        imageData: this.canvas.toDataURL()
       };
 
       const created = await this.service.Create(note);

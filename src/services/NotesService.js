@@ -22,10 +22,15 @@ export default class NotesService {
   }
 
   async Create(note) {
+    note.imageData = this.trim(note.imageData);
+
     const response = await fetch(`${this.baseUrl}`, {
       method: "POST",
-      body: note,
+      body: JSON.stringify(note),
       mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     if (!response.ok) {
@@ -37,4 +42,8 @@ export default class NotesService {
   //   Create(note) {}
   //   Update(note) {}
   //   Delete(note) {}
+  trim(note) {
+    const parts = note.split(",");
+    return parts[1];
+  }
 }
