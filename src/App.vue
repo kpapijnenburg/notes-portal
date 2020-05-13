@@ -27,12 +27,13 @@
         </md-list>
       </md-app-drawer>
       <md-app-content>
-        <div v-if="selectedNote">
+        <router-view></router-view>
+        <!-- <div v-if="selectedNote">
           <note :note="selectedNote"></note>
         </div>
         <div v-if="!selectedNote">
           <create @created="handleCreate"></create>
-        </div>
+        </div> -->
       </md-app-content>
     </md-app>
   </div>
@@ -40,12 +41,12 @@
 
 <script>
 import NotesService from "./services/NotesService";
-import Note from "./components/Note.vue";
-import Create from "./components/Create.vue";
+// import Note from "./components/Note.vue";
+// import Create from "./components/Create.vue";
 
 export default {
   name: "App",
-  components: { Note, Create },
+  // components: { Note, Create },
   data: () => {
     return {
       notes: [],
@@ -64,6 +65,7 @@ export default {
   },
   async mounted() {
     this.notes = await this.service.Get();
+    console.log(this.notes);
   }
 };
 </script>
