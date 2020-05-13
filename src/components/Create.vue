@@ -66,7 +66,10 @@ export default {
 
       const created = await this.service.Create(note);
 
-      this.$router.push({ path: `/view/${created.id}` });
+      if (created) {
+        this.$store.commit("add", created);
+        this.$router.push({ path: `/view/${created.id}` });
+      }
     }
   },
   mounted() {

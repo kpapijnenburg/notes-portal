@@ -10,7 +10,6 @@
         <md-list>
           <md-divider></md-divider>
           <md-list-item
-            @click="selectedNote = note"
             v-for="note of $store.state.notes"
             :to="`/view/${note.id}`"
             :key="note.id"
