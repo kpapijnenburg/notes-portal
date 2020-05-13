@@ -13,7 +13,7 @@ export default class NotesService {
     return await result;
   }
 
-  async GetById(id) {
+  async getById(id) {
     const response = await fetch(`${this.baseUrl}/${id}`);
 
     if (!response.ok) {

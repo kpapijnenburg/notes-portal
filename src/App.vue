@@ -12,13 +12,13 @@
           <md-list-item
             @click="selectedNote = note"
             v-for="note of notes"
-            href="#"
+            :to="`/view/${note.id}`"
             :key="note.id"
           >{{note.title}}</md-list-item>
           <md-divider></md-divider>
           <md-list-item>
             <md-button
-              @click="handleClick"
+              to="/create"
               class="md-icon-button md-dense md-raised md-primary md-alignment-right"
             >
               <md-icon>+</md-icon>
@@ -28,12 +28,6 @@
       </md-app-drawer>
       <md-app-content>
         <router-view></router-view>
-        <!-- <div v-if="selectedNote">
-          <note :note="selectedNote"></note>
-        </div>
-        <div v-if="!selectedNote">
-          <create @created="handleCreate"></create>
-        </div> -->
       </md-app-content>
     </md-app>
   </div>
@@ -41,12 +35,9 @@
 
 <script>
 import NotesService from "./services/NotesService";
-// import Note from "./components/Note.vue";
-// import Create from "./components/Create.vue";
 
 export default {
   name: "App",
-  // components: { Note, Create },
   data: () => {
     return {
       notes: [],
@@ -65,7 +56,6 @@ export default {
   },
   async mounted() {
     this.notes = await this.service.Get();
-    console.log(this.notes);
   }
 };
 </script>

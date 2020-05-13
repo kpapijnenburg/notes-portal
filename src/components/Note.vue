@@ -8,7 +8,7 @@
         <img img src="https://via.placeholder.com/500x300" alt />
       </md-card-media>
       <md-card-content>
-          <p class="md-body-2" v-for="sentence of sentences" :key="sentence.id">{{sentence}}</p>
+        <p class="md-body-2" v-for="sentence of sentences" :key="sentence.id">{{sentence}}</p>
       </md-card-content>
     </md-card>
     <div v-if="!note">Selecteer een notitie...</div>
@@ -17,15 +17,16 @@
 
 <script>
 import HandwritingService from "../services/HandwritingService";
+import NoteService from "../services/NotesService";
 
 export default {
   name: "Note",
-  props: ["note"],
-  components: {},
   data: () => {
     return {
       handwriting: undefined,
+      note: undefined,
       sentences: [],
+      noteService: new NoteService(),
       handwritingService: new HandwritingService()
     };
   },
@@ -38,6 +39,9 @@ export default {
 
         this.sentences = this.handwriting.content.split(/\r?\n/g);
       }
+    },
+    async $route() {
+      this.note = await this.noteService.getById(this.$route.params.id);
     }
   },
   filters: {
