@@ -11,7 +11,7 @@
           <md-divider></md-divider>
           <md-list-item
             @click="selectedNote = note"
-            v-for="note of notes"
+            v-for="note of $store.notes"
             :to="`/view/${note.id}`"
             :key="note.id"
           >{{note.title}}</md-list-item>
@@ -40,13 +40,11 @@ export default {
   name: "App",
   data: () => {
     return {
-      notes: [],
       service: new NotesService()
     };
   },
   async mounted() {
-    console.log(process.env.VUE_APP_NOTES_SERVER);
-    this.notes = await this.service.Get();
+    this.$store.notes = await this.service.Get();
   }
 };
 </script>
