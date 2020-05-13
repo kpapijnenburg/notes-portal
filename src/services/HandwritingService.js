@@ -1,6 +1,6 @@
 export default class HandwritingService {
   constructor() {
-    this.baseUrl = "http://localhost:8082/api/handwriting";
+    this.baseUrl = "http://localhost:8083/api/handwriting";
   }
 
   async GetByNoteId(noteId) {
