@@ -1,6 +1,6 @@
 export default class NotesService {
   constructor() {
-    this.baseUrl = "http://localhost:8082/api/notes";
+    this.baseUrl = process.env.VUE_APP_NOTES_SERVER;
   }
 
   async Get() {

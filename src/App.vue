@@ -45,6 +45,9 @@ export default {
     };
   },
   async mounted() {
+    console.log(process.env.VUE_APP_NOTES_SERVER)
+    console.log(process.env.VUE_APP_HANDWRITING_SERVER)
+
     this.notes = await this.service.Get();
   }
 };
