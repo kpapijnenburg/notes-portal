@@ -7,7 +7,14 @@
       </md-field>
     </md-card-header>
     <md-card-media>
-      <canvas width="500" height="300" @mousedown="startPainting" @mouseup="finishedPainting" @mousemove="draw" id="canvas"></canvas>
+      <canvas
+        width="500"
+        height="300"
+        @mousedown="startPainting"
+        @mouseup="finishedPainting"
+        @mousemove="draw"
+        id="canvas"
+      ></canvas>
     </md-card-media>
     <md-card-content>
       <md-button @click="handleAddClick" class="md-raised md-primary">Toevoegen</md-button>
@@ -17,6 +24,8 @@
 </template>
 
 <script>
+import NoteService from "../services/NotesService";
+
 export default {
   name: "Create",
   data: () => {
@@ -25,7 +34,8 @@ export default {
       vueCanvas: null,
       canvas: null,
       ctx: null,
-      painting: false
+      painting: false,
+      service: new NoteService()
     };
   },
   methods: {
@@ -48,23 +58,23 @@ export default {
       this.ctx.beginPath();
       this.ctx.moveTo(e.layerX, e.layerY);
     },
-    handleAddClick() {
+    async handleAddClick() {
       const note = {
         title: this.title,
         imageData: this.canvas.toDataURL(),
         createdAt: Date.now(),
         updatedAt: Date.now()
-      }
-      
-      this.$emit('created', note);
+      };
+
+      const created = await this.service.Create(note);
+
+      this.$router.push({ path: `/view/${created.id}` });
     }
   },
   mounted() {
-    // Resize canvas
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
     this.vueCanvas = this.ctx;
-    // tutorial https://codesource.io/build-a-drawing-app-with-and-vuejs-html5-canvas/
   }
 };
 </script>

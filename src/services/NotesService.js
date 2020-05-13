@@ -1,20 +1,18 @@
 export default class NotesService {
   constructor() {
-    this.baseUrl = "http://localhost:3000/notes";
+    this.baseUrl = "http://localhost:8082/api/notes";
   }
 
   async Get() {
-    const result = fetch(this.baseUrl)
-      .then((res) => res.json())
-      .catch((err) => {
-        throw err;
-      });
+    const response = await fetch(this.baseUrl, {
+      mode: "cors",
+    });
 
-    return await result;
+    return response.json();
   }
 
   async getById(id) {
-    const response = await fetch(`${this.baseUrl}/${id}`);
+    const response = await fetch(`${this.baseUrl}/${id}`, { mode: "cors" });
 
     if (!response.ok) {
       // Do something
@@ -27,6 +25,7 @@ export default class NotesService {
     const response = await fetch(`${this.baseUrl}`, {
       method: "POST",
       body: note,
+      mode: "cors",
     });
 
     if (!response.ok) {
