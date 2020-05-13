@@ -27,7 +27,14 @@ const store = new Vuex.Store({
   },
   mutations: {
     add(state, note) {
-      state.notes.add(note);
+      state.notes.push(note);
+    },
+  },
+  getters: {
+    getById: (state) => (id) => {
+      return state.notes.find((note) => {
+        return note.id == id;
+      });
     },
   },
 });

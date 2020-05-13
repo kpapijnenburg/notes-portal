@@ -40,7 +40,7 @@ export default {
       }
     },
     async $route() {
-      this.note = await this.noteService.getById(this.$route.params.id);
+      this.note = this.$store.getters.getById(this.$route.params.id);
     }
   },
   filters: {
