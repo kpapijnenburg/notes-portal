@@ -41,18 +41,8 @@ export default {
   data: () => {
     return {
       notes: [],
-      selectedNote: undefined,
       service: new NotesService()
     };
-  },
-  methods: {
-    handleClick() {
-      this.selectedNote = undefined;
-    },
-    async handleCreate(note) {
-      const created = await this.service.Create(note);
-      console.log(created);
-    }
   },
   async mounted() {
     this.notes = await this.service.Get();
