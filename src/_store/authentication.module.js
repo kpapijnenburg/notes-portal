@@ -1,7 +1,7 @@
 // import { userService } from "../_services";
 // import { router } from "../_helpers";
 import { userService } from "./../services/UserService";
-import { router } from "./../_helpers/router";
+import router from "./../_helpers/router";
 
 const user = JSON.parse(localStorage.getItem("user"));
 const initialState = user
