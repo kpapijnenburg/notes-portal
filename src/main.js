@@ -14,7 +14,7 @@ import "vue-material/dist/theme/default.css";
 const routes = [
   { path: "/create", component: Create, meta: { requiresAuth: true } },
   { path: "/view/:id", component: Note, meta: { requiresAuth: true } },
-  { path: "/login", component: Login },
+  { path: "/login", component: Login, meta: { requiresAuth: false } },
   // Redirect to home
   { path: "*", redirect: "/" },
 ];

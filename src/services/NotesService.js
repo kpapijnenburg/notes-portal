@@ -39,9 +39,6 @@ export default class NotesService {
 
     return response.json();
   }
-  //   Create(note) {}
-  //   Update(note) {}
-  //   Delete(note) {}
   trim(note) {
     const parts = note.split(",");
     return parts[1];
