@@ -1,7 +1,7 @@
 <template>
-  <div class="view" md-align="center">
-    <h2>Login</h2>
+  <div class="container">
     <form @submit.prevent>
+    <h2>Login</h2>
       <md-field>
         <label for="email">Email adres</label>
         <md-input type="text" v-model="email" name="email"></md-input>
@@ -13,6 +13,9 @@
       </md-field>
       <div v-show="submitted && !password" class="invalid-feedback">Wachtwoord is benodigd</div>
       <div>
+        <div v-if="alert.message" class="invalid-feedback">
+          <span>{{alert.message}}</span>
+        </div>
         <md-button
           v-on:click="handleSubmit"
           class="md-raised md-primary"
@@ -24,9 +27,6 @@
         />
       </div>
     </form>
-    <div v-if="alert.message" :class="`${alert.type}`">
-      <span>{{alert.message}}</span>
-    </div>
   </div>
 </template>
 
@@ -74,5 +74,9 @@ export default {
 .invalid-feedback {
   color: red;
 }
-
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

@@ -1,16 +1,17 @@
 
 <template>
-  <div>
-    <md-toolbar class="md-primary">
-        <span><a class="md-title" href="/">Notes</a></span>
-        <span>hallo</span>
-    </md-toolbar>
-  </div>
+  <md-app-toolbar class="md-primary">
+    <span class="md-title">Notities</span>
+    <md-button class="md-icon-button" to="/login">
+      <md-icon class="fa fa-user"></md-icon>
+    </md-button>
+  </md-app-toolbar>
 </template>
 
 <script>
-
-export default {};
+export default {
+  name: "nav-bar"
+};
 </script>
 
 <style>

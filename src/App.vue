@@ -2,10 +2,12 @@
   <div class="page-container">
     <md-app class="md-app">
       <md-app-toolbar class="md-primary">
-        <span class="md-title">Notities</span>
-        <md-button class="md-icon-button" to="/login">
-          <md-icon class="fa fa-user"></md-icon>
-        </md-button>
+        <span class="md-title" style="flex: 1">Notities</span>
+        <a href="/login">
+          <md-button>Login</md-button>
+        </a>
+        <span>|</span>
+        <md-button v-on:click="logout">Logout</md-button>
       </md-app-toolbar>
       <side-bar></side-bar>
       <md-app-content>
@@ -17,6 +19,7 @@
 
 <script>
 import NotesService from "./services/NotesService";
+import { userService } from "./services/UserService";
 import SideBar from "./components/layout/SideBar.vue";
 
 export default {
@@ -26,11 +29,18 @@ export default {
   },
   data: () => {
     return {
-      service: new NotesService()
+      service: new NotesService(),
+      userService: userService
     };
   },
   async mounted() {
     this.$store.state.notes = await this.service.Get();
+  },
+  methods: {
+    logout() {
+      this.userService.logout()
+      this.$router.push("/login")
+    }
   }
 };
 </script>
