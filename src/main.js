@@ -8,8 +8,8 @@ import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 
-import { configureFakeBackend } from "./_helpers/fake-backend.ts";
-configureFakeBackend();
+//import { configureFakeBackend } from "./_helpers/fake-backend.ts";
+//configureFakeBackend();
 
 Vue.use(VueMaterial);
 

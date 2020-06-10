@@ -19,7 +19,7 @@
 
 <script>
 import NotesService from "./services/NotesService";
-import { userService } from "./services/UserService";
+import UserService from "./services/UserService";
 import SideBar from "./components/layout/SideBar.vue";
 
 export default {
@@ -30,7 +30,7 @@ export default {
   data: () => {
     return {
       service: new NotesService(),
-      userService: userService
+      userService: new UserService()
     };
   },
   async mounted() {

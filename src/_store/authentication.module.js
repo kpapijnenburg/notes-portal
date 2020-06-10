@@ -1,4 +1,4 @@
-import { userService } from "./../services/UserService";
+import UserService from "./../services/UserService";
 import router from "./../_helpers/router";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -13,6 +13,7 @@ export const authentication = {
   actions: {
     login({ dispatch, commit }, { email, password }) {
       commit("loginRequest", { email });
+      const userService = new UserService();
       userService.login(email, password).then(
         (user) => {
           commit("loginSuccess", user);
@@ -25,12 +26,15 @@ export const authentication = {
       );
     },
     register({ commit }, { email, password }) {
+      const userService = new UserService();
       userService.register(email, password).then((user) => {
         commit("registerSuccess", user);
         router.push("/login");
       });
     },
     logout({ commit }) {
+      const userService = new UserService();
+
       userService.logout();
       commit("logout");
     },
