@@ -13,6 +13,7 @@ const router = new Router({
     { path: "/create", component: Create, meta: { requiresAuth: true } },
     { path: "/view/:id", component: Note, meta: { requiresAuth: true } },
     { path: "/login", component: Login, meta: { requiresAuth: false } },
+    { path: "*", redirect: "/login", meta: { requiresAuth: false } },
   ],
 });
 
