@@ -11,10 +11,10 @@ export const authentication = {
   namespaced: true,
   state: initialState,
   actions: {
-    login({ dispatch, commit }, { email, password }) {
-      commit("loginRequest", { email });
+    login({ dispatch, commit }, { username, password }) {
+      commit("loginRequest", { username });
       const userService = new UserService();
-      userService.login(email, password).then(
+      userService.login(username, password).then(
         (user) => {
           commit("loginSuccess", user);
           router.push("/create");
@@ -25,9 +25,9 @@ export const authentication = {
         }
       );
     },
-    register({ commit }, { email, password }) {
+    register({ commit }, { username, password }) {
       const userService = new UserService();
-      userService.register(email, password).then((user) => {
+      userService.register(username, password).then((user) => {
         commit("registerSuccess", user);
         router.push("/login");
       });

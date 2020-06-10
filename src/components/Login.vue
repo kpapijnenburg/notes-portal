@@ -3,10 +3,10 @@
     <form @submit.prevent>
       <h2>Inloggen</h2>
       <md-field>
-        <label for="email">Email adres</label>
-        <md-input type="text" v-model="email" name="email"></md-input>
+        <label for="email">Gebruikersnaam</label>
+        <md-input type="text" v-model="username" name="username"></md-input>
       </md-field>
-      <span v-show="submitted && !email" class="invalid-feedback">Emailadres is benodigd</span>
+      <span v-show="submitted && !username" class="invalid-feedback">Gebruikersnaam is benodigd</span>
       <md-field>
         <label for="password">Wachtwoord</label>
         <md-input type="password" v-model="password" name="password"></md-input>
@@ -39,7 +39,7 @@
 export default {
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
       submitted: false
     };
@@ -64,11 +64,11 @@ export default {
   methods: {
     handleSubmit() {
       this.submitted = true;
-      const { email, password } = this;
+      const { username, password } = this;
       const { dispatch } = this.$store;
 
-      if (email && password) {
-        dispatch("authentication/login", { email, password });
+      if (username && password) {
+        dispatch("authentication/login", { username, password });
       }
     }
   }

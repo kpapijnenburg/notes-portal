@@ -5,12 +5,12 @@ export default class UserService {
     this.baseUrl = process.env.VUE_APP_IDENTITY_SERVER;
   }
 
-  async login(email, password) {
+  async login(username, password) {
     const requestOptions = {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     };
 
     const response = await fetch(this.baseUrl, requestOptions);
@@ -24,11 +24,11 @@ export default class UserService {
     return user;
   }
 
-  async register(email, password) {
+  async register(username, password) {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     };
 
     const response = await fetch("http://localhost:4000/users", requestOptions);
