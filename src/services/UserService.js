@@ -4,6 +4,7 @@ export const userService = {
   login,
   logout,
   getAll,
+  register,
 };
 
 async function login(email, password) {
@@ -25,6 +26,18 @@ async function login(email, password) {
   }
 
   return user;
+}
+
+async function register(email, password) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  };
+
+  const response = await fetch("http://localhost:4000/users", requestOptions);
+
+  return await handleResponse(response);
 }
 
 function logout() {

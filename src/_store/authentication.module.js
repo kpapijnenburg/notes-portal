@@ -24,6 +24,12 @@ export const authentication = {
         }
       );
     },
+    register({ commit }, { email, password }) {
+      userService.register(email, password).then((user) => {
+        commit("registerSuccess", user);
+        router.push("/login");
+      });
+    },
     logout({ commit }) {
       userService.logout();
       commit("logout");
