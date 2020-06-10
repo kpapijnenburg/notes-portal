@@ -42,19 +42,20 @@ async function getAll() {
   return handleResponse(response);
 }
 
-function handleResponse(response) {
-  const data = JSON.parse(response.text());
+async function handleResponse(response) {
+  return response.text().then((text) => {
+    const data = text && JSON.parse(text);
+    if (!response.ok) {
+      if (response.status === 401) {
+        // auto logout if 401 response returned from api
+        logout();
+        location.reload(true);
+      }
 
-  if (!response.ok) {
-    if (response.status === 401) {
-      // If 401: unauthorized the user is logged out.
-      logout();
-      location.reload(true);
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
     }
 
-    const error = (data && data.message) || response.statusText;
-    return Promise.reject(error);
-  }
-
-  return data;
+    return data;
+  });
 }
