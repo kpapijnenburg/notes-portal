@@ -1,33 +1,40 @@
 <template>
-  <md-card>
-    <md-card-header>
-      <md-field>
-        <label>Titel</label>
-        <md-input v-model="title" type="text" />
-      </md-field>
-    </md-card-header>
-    <md-card-media>
-      <canvas
-        width="500"
-        height="300"
-        @mousedown="startPainting"
-        @mouseup="finishedPainting"
-        @mousemove="draw"
-        id="canvas"
-      ></canvas>
-    </md-card-media>
-    <md-card-content>
-      <md-button @click="handleAddClick" class="md-raised md-primary">Toevoegen</md-button>
-      <md-button class="md-raised md-accent">Annuleren</md-button>
-    </md-card-content>
-  </md-card>
+  <div class="container">
+    <side-bar></side-bar>
+    <md-card>
+      <md-card-header>
+        <md-field>
+          <label>Titel</label>
+          <md-input v-model="title" type="text" />
+        </md-field>
+      </md-card-header>
+      <md-card-media>
+        <canvas
+          width="500"
+          height="300"
+          @mousedown="startPainting"
+          @mouseup="finishedPainting"
+          @mousemove="draw"
+          id="canvas"
+        ></canvas>
+      </md-card-media>
+      <md-card-content>
+        <md-button @click="handleAddClick" class="md-raised md-primary">Toevoegen</md-button>
+        <md-button class="md-raised md-accent">Annuleren</md-button>
+      </md-card-content>
+    </md-card>
+  </div>
 </template>
 
 <script>
 import NoteService from "../services/NotesService";
+import SideBar from "../components/layout/SideBar"
 
 export default {
   name: "Create",
+  components: {
+    "side-bar": SideBar
+  },
   data: () => {
     return {
       title: "",
@@ -89,5 +96,10 @@ export default {
   border: 1px solid grey;
   height: 300px;
   width: 500px;
+}
+.container {
+  display: flex;
+  justify-content: left;
+  align-items: top;
 }
 </style>
