@@ -3,10 +3,12 @@
     <md-app class="md-app">
       <md-app-toolbar class="md-primary">
         <span class="md-title">Notities</span>
+        <md-button class="md-icon-button" to="/login">
+          <md-icon class="fa fa-user"></md-icon>
+        </md-button>
       </md-app-toolbar>
-
       <md-app-drawer md-permanent="card">
-        <md-toolbar class="md-transparent md-title" md-elevation="0">Mijn notities</md-toolbar>
+        <md-toolbar class="md-transparent md-title" md-elevation="0">Mijn Notities</md-toolbar>
         <md-list>
           <md-divider></md-divider>
           <md-list-item
@@ -41,6 +43,11 @@ export default {
     return {
       service: new NotesService()
     };
+  },
+  methods: {
+    handleLoginClick() {
+      console.log("Login click");
+    }
   },
   async mounted() {
     this.$store.state.notes = await this.service.Get();

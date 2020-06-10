@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import App from "./App.vue";
 import Create from "./components/Create.vue";
 import Note from "./components/Note.vue";
+import Login from "./components/Login.vue";
 
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
@@ -13,6 +14,7 @@ import "vue-material/dist/theme/default.css";
 const routes = [
   { path: "/create", component: Create },
   { path: "/view/:id", component: Note },
+  { path: "/login", component: Login },
 ];
 
 const router = new VueRouter({ routes });
