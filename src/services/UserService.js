@@ -18,7 +18,7 @@ async function login(email, password) {
     requestOptions
   );
 
-  const user = handleResponse(response);
+  const user = await handleResponse(response);
 
   if (user.token) {
     localStorage.setItem("user", JSON.stringify(user));
