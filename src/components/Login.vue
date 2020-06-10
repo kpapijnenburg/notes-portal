@@ -24,6 +24,9 @@
         />
       </div>
     </form>
+    <div v-if="alert.message" :class="`${alert.type}`">
+      <span>{{alert.message}}</span>
+    </div>
   </div>
 </template>
 
@@ -37,8 +40,16 @@ export default {
     };
   },
   computed: {
+    alert() {
+      return this.$store.state.alert;
+    },
     loggingIn() {
       return this.$store.state.authentication.status.loggingIn;
+    }
+  },
+  watch: {
+    $route() {
+      this.$store.dispatch("alert/clear");
     }
   },
   created() {
@@ -63,4 +74,5 @@ export default {
 .invalid-feedback {
   color: red;
 }
+
 </style>
