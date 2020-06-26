@@ -1,3 +1,5 @@
+import { authHeader } from "./../_helpers/auth-header";
+
 export default class NotesService {
   constructor() {
     this.baseUrl = process.env.VUE_APP_NOTES_SERVER;
@@ -5,14 +7,16 @@ export default class NotesService {
 
   async Get() {
     const response = await fetch(this.baseUrl, {
-      mode: "cors",
+      headers: this.getHeaders(),
     });
 
     return response.json();
   }
 
   async getById(id) {
-    const response = await fetch(`${this.baseUrl}/${id}`, { mode: "cors" });
+    const response = await fetch(`${this.baseUrl}/${id}`, {
+      headers: this.getHeaders(),
+    });
 
     if (!response.ok) {
       // Do something
@@ -24,13 +28,13 @@ export default class NotesService {
   async Create(note) {
     note.imageData = this.trim(note.imageData);
 
+    let headers = this.getHeaders();
+    headers["Content-Type"] = "application/json";
+
     const response = await fetch(`${this.baseUrl}`, {
       method: "POST",
       body: JSON.stringify(note),
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: headers,
     });
 
     if (!response.ok) {
@@ -42,5 +46,11 @@ export default class NotesService {
   trim(note) {
     const parts = note.split(",");
     return parts[1];
+  }
+
+  getHeaders() {
+    let headers = authHeader();
+    headers["Access-Control-Allow-Origin"] = "*";
+    return headers;
   }
 }

@@ -7,7 +7,7 @@
           <div class="md-title">{{this.note.title}}</div>
         </md-card-header>
         <md-card-media>
-          <img v-bind:src="'data:image/png;base64, ' + this.handwriting.image" alt="Geen image" />
+          <img v-bind:src="'data:image/png;base64, ' + this.note.imageData" alt="Geen image" />
         </md-card-media>
         <md-card-content>
           <p class="md-body-2" v-for="sentence of sentences" :key="sentence.id">{{sentence}}</p>
@@ -49,6 +49,9 @@ export default {
     async $route() {
       this.note = this.$store.getters.getById(this.$route.params.id);
     }
+  },
+  async mounted() {
+    this.note = await this.noteService.getById(this.$route.params.id);
   },
   filters: {
     localeDate(value) {

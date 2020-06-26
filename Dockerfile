@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts-alpine as build-stage
 
 # install simple http server for serving static content
 RUN npm install -g http-server
@@ -6,17 +6,18 @@ RUN npm install -g http-server
 # make the 'app' folder the current working directory
 WORKDIR /app
 
-# copy both 'package.json' and 'package-lock.json' (if available)
+# Configure the environment variables to use values from a docker-compose file.
+ENV VUE_APP_NOTES_SERVER=$VUE_APP_NOTES_SERVER
+ENV VUE_APP_HANDWRITING_SERVER=$VUE_APP_HANDWRITING_SERVER
+ENV VUE_APP_IDENTITY_SERVER=$VUE_APP_IDENTITY_SERVER
+
 COPY package*.json ./
-
-# install project dependencies
 RUN npm install
-
-# copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
-
-# build app for production with minification
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -8,8 +8,8 @@ export const notes = {
     },
   },
   getters: {
-    getById: (state) => (id) => {
-      return state.notes.find((note) => {
+    getById: (notes) => (id) => {
+      return notes.find((note) => {
         return note.id == id;
       });
     },

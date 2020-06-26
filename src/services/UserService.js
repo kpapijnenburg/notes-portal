@@ -31,7 +31,7 @@ export default class UserService {
       body: JSON.stringify({ username, password }),
     };
 
-    const response = await fetch("http://localhost:4000/users", requestOptions);
+    const response = await fetch(`${this.baseUrl}/register`, requestOptions);
 
     return await this.handleResponse(response);
   }

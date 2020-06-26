@@ -68,7 +68,11 @@ export default {
     async handleAddClick() {
       const note = {
         title: this.title,
-        imageData: this.canvas.toDataURL()
+        imageData: this.canvas.toDataURL(),
+        userId: this.$store.state.authentication.user.id,
+        user: {
+          id: this.$store.state.authentication.user.id
+        }
       };
 
       const created = await this.service.Create(note);
